@@ -23,10 +23,10 @@ public class OrderApp {
         Member member = new Member(memberId,"memberA", Grade.VIP);
         memberService.join(member);
 
-        Order order = orderService.createOrder(memberId, "itemA", 10000);
+        Order order = orderService.createOrder(memberId, "itemA", 20000);
 
-        System.out.printf("order = " + order);
-        System.out.printf("order.calcuatePrice = " + order.calculatePrice());
+        System.out.printf("order = " + order );
+        // System.out.printf("order.calcuatePrice = " + order.calculatePrice());
 
 
     }
