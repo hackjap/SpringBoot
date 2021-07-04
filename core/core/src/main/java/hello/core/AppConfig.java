@@ -20,6 +20,7 @@ public class AppConfig { // AppConfig = 공연 기획자 ( 역할과 구현을 �
         return new MemberServiceImpl(memberRepository());
     }
 
+
     @Bean
     public MemoryMemberRepository memberRepository() { // 역할과 구현을 한 눈에 파악됨
         return new MemoryMemberRepository();

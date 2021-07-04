@@ -15,3 +15,41 @@
 
 - AppConfig 처럼 객체를 생성하고 관리하면서 의존관계를 연결해 주는 것을 IoC컨테이너 또는 "DI 컨테이너"라 한다.
 
+
+### 스프링 컨테이너 생성
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);    // 스프링 컨테이너 생성
+ 
+
+
+## ApllicationContext가 제공하는 부가기능
+
+### 메시지 소스를 활용한 국제화 기능
+
+### 환경변수
+
+### 애플리케이션 이벤트
+
+### 변리한 리소스 조회
+
+### 정리
+- ApplicationContext는 BeanFactory의 기능을 상속받는다
+- ApplicationContext는 빈 관리기능 + 편리한 부가 기능 제공
+- BeanFactory를 직접 사용할 일은 거의 없다. 부가기능이 포함된 ApplicationContext를 사용한다.
+- BeanFacotry나 ApplicationContext를 스프링 컨테이너라 한다.
+
+
+### 다양한 설정 형식 지원 - 자바코드,XML
+- 스프링 컨테이너는 다양한 형식의 설정 정보를 받아드릴 수 있게 유연하게 설계
+    - 자바코드, XML , Groovy 등
+
+  
+## 싱글톤 패턴
+
+### 싱글톤 패턴의 개요
+- 트래픽이 많으면 그 만큼 객체가 생성되고 메모리 낭비가 심하다.
+- 따라서 싱글톤 패턴을 사용하여 객체를 공유하도록 설계
+
+### 싱글톤패턴이란?
+- 클래스의 인스턴스가 딱 1개만 생성되는 것을 보장하는 디자인 패턴.
+- 그래서 객체 인스턴스를 2개 이상 생성하지 못하도록 막아야 함.
+  - private 새성자를 사용해서 외부에서 임의로 new 키워드를 사용하지 못하도록 막아야 함 
