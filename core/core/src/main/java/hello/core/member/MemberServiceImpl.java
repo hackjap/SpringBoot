@@ -8,7 +8,7 @@ public class MemberServiceImpl implements  MemberService{
 
     // 관심사의 분리 (역할과 구현의 분리)
     // private final MemberRepository memberRepository = new MemoryMemberRepository();
-    private final MemberRepository memberRepository;
+    @Autowired  private final MemberRepository memberRepository;
 
     @Autowired
     public MemberServiceImpl(MemberRepository memberRepository) {

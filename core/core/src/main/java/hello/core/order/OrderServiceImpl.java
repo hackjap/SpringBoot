@@ -6,33 +6,33 @@ import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class OrderServiceImpl implements OrderService {
 
-/*     관심사 분리
-        private final MemberRepository memberRepository = new MemoryMemberRepository();
-        private final DiscountPolicy discountPolicy = new FixDiscountPolicy(); // fixDisCountPolicy(구현체)도 의존하므로 DIP 위반!*/
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
 
-    private MemberRepository memoryRepository;
-    private DiscountPolicy discountPolicy;
 
     @Autowired
-    public OrderServiceImpl(MemberRepository memoryRepository, DiscountPolicy discountPolicy) {
-        this.memoryRepository = memoryRepository;
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository; // 할인정책 변경
         this.discountPolicy = discountPolicy;
+
     }
 
-    // 인터페이스에만 의존하도록 구현
-    //  private final DiscountPolicy discountPolicy = new RateDiscountPolicy(); // 할인정책 변경
-//    private DiscountPolicy discountPolicy;
-
+//    // 일반 메서드 주입
+//    @Autowired
+//    public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+//
+//    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
-        Member member = memoryRepository.findById(memberId);
+        Member member = memberRepository.findById(memberId);
         int discountPrice = discountPolicy.discount(member, itemPrice);
 
         return new Order(memberId, itemName, itemPrice, discountPrice);
@@ -41,6 +41,6 @@ public class OrderServiceImpl implements OrderService {
 
     // 테스트 용도
     public MemberRepository getMemoryRepository() {
-        return memoryRepository;
+        return memberRepository;
     }
 }
